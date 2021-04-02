@@ -1,9 +1,9 @@
 output vpc_id {
     value = module.basic_example.vpc_id
-    description = "ID da vpc"
+    description = "VPC ID"
 }
 
-output subnet_ids {
-    value = module.basic_example.subnet_ids
-    description = "Subnet ID"
+output app_subnet_ids {
+    value = module.basic_example.subnet_ids.app
+    description = "App Subnet Ids"
 }

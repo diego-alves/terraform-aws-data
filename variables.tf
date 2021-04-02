@@ -1,9 +1,9 @@
-variable "vpc_tags" {
+variable "vpc_logical_id" {
   description = "Tags for Vpc Identification"
-  type = map(string)
+  type = string
 }
 
-variable "subnet_tags" {
+variable "subnet_logical_ids" {
   description = "Tags for Subnet Identification"
-  type = map(string)
+  type = map(list(string))
 }

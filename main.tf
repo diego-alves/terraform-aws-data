@@ -1,8 +1,14 @@
 data "aws_vpc" "selected" {
-  tags = var.vpc_tags
+  tags = {
+    "aws:cloudformation:logical-id" : var.vpc_logical_id
+  }
 }
 
 data "aws_subnet_ids" "selected" {
+  for_each = var.subnet_logical_ids
   vpc_id = data.aws_vpc.selected.id
-  tags = var.subnet_tags
+  filter {
+    name   = "tag:aws:cloudformation:logical-id"
+    values = each.value
+  }
 }

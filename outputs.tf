@@ -4,6 +4,8 @@ output vpc_id {
 }
 
 output subnet_ids {
-    value = data.aws_subnet_ids.selected.ids
+    value = tomap({
+        for k, ids in data.aws_subnet_ids.selected: k => ids.ids
+    })
     description = "Subnet ID"
 }

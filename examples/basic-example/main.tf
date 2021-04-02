@@ -1,9 +1,9 @@
 module "basic_example" {
   source = "../.."
-  vpc_tags = {
-    "aws:cloudformation:logical-id" : "MainVPC"
-  }
-  subnet_tags = {
-    "aws:cloudformation:logical-id" : "AppSubNet2"
-  }
+  vpc_logical_id = "MainVPC"
+	subnet_logical_ids = {
+		app: ["AppSubNet1", "AppSubNet2"]
+		pub: ["PublicSubNet1", "PublicSubNet2"]
+		db:  ["DBSubNet1", "DBSubNet2"]
+	}
 }
