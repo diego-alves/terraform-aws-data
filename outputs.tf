@@ -9,3 +9,13 @@ output subnet_ids {
     })
     description = "Subnet ID"
 }
+
+output account_id {
+    value = data.aws_caller_identity.current.account_id
+    description = "Account ID"
+}
+
+output region {
+    value = data.aws_region.current.name
+    description = "Region"
+}

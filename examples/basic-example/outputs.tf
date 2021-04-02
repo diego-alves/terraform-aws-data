@@ -17,3 +17,13 @@ output db_subnet_ids {
     value = module.basic_example.subnet_ids.db
     description = "Data Subnet Ids"
 }
+
+output account_id {
+    value = module.basic_example.account_id
+    description = "Account ID"
+}
+
+output region {
+    value = module.basic_example.region
+    description = "Region"
+}

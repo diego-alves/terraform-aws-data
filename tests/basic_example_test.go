@@ -9,11 +9,12 @@ import (
 
 func TestTerraformBasicExample(t *testing.T) {
 	t.Parallel()
+	expectedRegion := "us-east-1"
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		TerraformDir: "../examples/basic-example",
 		EnvVars: map[string]string{
-			"AWS_DEFAULT_REGION": "us-east-1",
+			"AWS_DEFAULT_REGION": expectedRegion,
 		},
 		NoColor: true,
 	})
@@ -25,22 +26,26 @@ func TestTerraformBasicExample(t *testing.T) {
 	appSubnetIds := terraform.OutputList(t, terraformOptions, "app_subnet_ids")
 	pubSubnetIds := terraform.OutputList(t, terraformOptions, "pub_subnet_ids")
 	dbSubnetIds := terraform.OutputList(t, terraformOptions, "db_subnet_ids")
+	accountId := terraform.Output(t, terraformOptions, "account_id")
+	region := terraform.Output(t, terraformOptions, "region")
 
-	assert.Equal(t, "vpc-", vpcId[:4])
+	assert.Equal(t, expectedRegion, region)
+	assert.Regexp(t, "^\\d{12}$", accountId)
+	assert.Regexp(t, "^vpc-[0-9a-f]{17}$", vpcId)
 	assert.Equal(t, 2, len(appSubnetIds))
 	assert.Equal(t, 2, len(pubSubnetIds))
 	assert.Equal(t, 2, len(dbSubnetIds))
 
 	for _, element := range appSubnetIds {
-		assert.Equal(t, "subnet-", element[:7])
+		assert.Regexp(t, "^subnet-[0-9a-f]{17}$", element)
 	}
 
 	for _, element := range pubSubnetIds {
-		assert.Equal(t, "subnet-", element[:7])
+		assert.Regexp(t, "^subnet-[0-9a-f]{17}$", element)
 	}
 
 	for _, element := range dbSubnetIds {
-		assert.Equal(t, "subnet-", element[:7])
+		assert.Regexp(t, "^subnet-[0-9a-f]{17}$", element)
 	}
 
 }
