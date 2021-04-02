@@ -3,7 +3,7 @@ output vpc_id {
     description = "ID da vpc"
 }
 
-output subnet_id {
-    value = module.basic_example.subnet_id
+output subnet_ids {
+    value = module.basic_example.subnet_ids
     description = "Subnet ID"
 }

@@ -3,7 +3,7 @@ output vpc_id {
     description = "ID da vpc"
 }
 
-output subnet_id {
-    value = data.aws_subnet.selected.id
+output subnet_ids {
+    value = data.aws_subnet_ids.selected.ids
     description = "Subnet ID"
 }

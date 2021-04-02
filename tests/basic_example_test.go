@@ -11,23 +11,31 @@ import (
 func TestTerraformBasicExample(t *testing.T) {
 	t.Parallel()
 
-	expectedText := ""
 	// expectedList := []string{expectedText}
 	// expectedMap := map[string]string{"expected": expectedText}
+	expectedVpcId := ""
+	expectedSubnetIds := []string{""}
 
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		// website::tag::1::Set the path to the Terraform code that will be tested.
 		// The path to where our Terraform code is located
-		TerraformDir: "../examples/basic-example",
+		TerraformDir: "..",
 
 		// Variables to pass to our Terraform code using -var options
-		// Vars: map[string]interface{}{
-		// 	"example": expectedText,
+		Vars: map[string]interface{}{
+			"vpc_tags": map[string]string{
+				"aws:cloudformation:logical-id": "MainVPC",
+			},
+			"subnet_tags": map[string]string{
+				"aws:cloudformation:logical-id": "AppSubNet2",
+			},
 
-		// 	// We also can see how lists and maps translate between terratest and terraform.
-		// 	"example_list": expectedList,
-		// 	"example_map":  expectedMap,
-		// },
+			// "example": expectedText,
+
+			// // We also can see how lists and maps translate between terratest and terraform.
+			// "example_list": expectedList,
+			// "example_map":  expectedMap,
+		},
 
 		// Variables to pass to our Terraform code using -var-file options
 		// VarFiles: []string{"varfile.tfvars"},
@@ -46,15 +54,15 @@ func TestTerraformBasicExample(t *testing.T) {
 
 	// Run `terraform output` to get the values of output variables
 	vpcId := terraform.Output(t, terraformOptions, "vpc_id")
-	subnet_id := terraform.Output(t, terraformOptions, "subnet_id")
+	subnet_ids := terraform.OutputList(t, terraformOptions, "subnet_ids")
 	// actualTextExample2 := terraform.Output(t, terraformOptions, "example2")
 	// actualExampleList := terraform.OutputList(t, terraformOptions, "example_list")
 	// actualExampleMap := terraform.OutputMap(t, terraformOptions, "example_map")
 
 	// website::tag::3::Check the output against expected values.
 	// Verify we're getting back the outputs we expect
-	assert.Equal(t, expectedText, vpcId)
-	assert.Equal(t, "", subnet_id)
+	assert.Equal(t, expectedVpcId, vpcId)
+	assert.Equal(t, expectedSubnetIds, subnet_ids)
 
 	// 	assert.Equal(t, expectedText, actualTextExample2)
 	// 	assert.Equal(t, expectedList, actualExampleList)
