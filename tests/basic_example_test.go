@@ -23,10 +23,23 @@ func TestTerraformBasicExample(t *testing.T) {
 
 	vpcId := terraform.Output(t, terraformOptions, "vpc_id")
 	appSubnetIds := terraform.OutputList(t, terraformOptions, "app_subnet_ids")
+	pubSubnetIds := terraform.OutputList(t, terraformOptions, "pub_subnet_ids")
+	dbSubnetIds := terraform.OutputList(t, terraformOptions, "db_subnet_ids")
 
 	assert.Equal(t, "vpc-", vpcId[:4])
 	assert.Equal(t, 2, len(appSubnetIds))
+	assert.Equal(t, 2, len(pubSubnetIds))
+	assert.Equal(t, 2, len(dbSubnetIds))
+
 	for _, element := range appSubnetIds {
+		assert.Equal(t, "subnet-", element[:7])
+	}
+
+	for _, element := range pubSubnetIds {
+		assert.Equal(t, "subnet-", element[:7])
+	}
+
+	for _, element := range dbSubnetIds {
 		assert.Equal(t, "subnet-", element[:7])
 	}
 
