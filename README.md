@@ -25,7 +25,7 @@ The basic usage assumes you have a VPC and Subnets with Cloudformation Tag `aws:
 - `PublicSubNet1` and `PublicSubNet1` for the public subnets as `subnet_ids.pub` in the output.
 - `DBSubNet1` and `DBSubNet1` for the data base subnets as `subnet_ids.dat` in the output.
 
-If your tag is different, you can specify as variables as follows:
+If your tag is different, you can specify the variables as follows:
 
 ```hcl
 module "data" {
@@ -33,10 +33,10 @@ module "data" {
   version = "0.0.5"
 
   vpc_logical_id = "MainVPC"
-	subnet_logical_ids = {
-		app: ["AppSubNet1", "AppSubNet2"]
-		pub: ["PublicSubNet1", "PublicSubNet2"]
-		dat: ["DBSubNet1", "DBSubNet2"]
-	}
+  subnet_logical_ids = {
+    app : ["AppSubNet1", "AppSubNet2"]
+    pub : ["PublicSubNet1", "PublicSubNet2"]
+    dat : ["DBSubNet1", "DBSubNet2"]
+  }
 }
 ```
