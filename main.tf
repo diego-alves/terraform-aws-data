@@ -6,7 +6,7 @@ data "aws_vpc" "selected" {
 
 data "aws_subnet_ids" "selected" {
   for_each = var.subnet_logical_ids
-  vpc_id = data.aws_vpc.selected.id
+  vpc_id   = data.aws_vpc.selected.id
   filter {
     name   = "tag:aws:cloudformation:logical-id"
     values = each.value

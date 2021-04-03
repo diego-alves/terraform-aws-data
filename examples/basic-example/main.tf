@@ -1,9 +1,9 @@
 module "basic_example" {
-  source = "../.."
+  source         = "../.."
   vpc_logical_id = "MainVPC"
-	subnet_logical_ids = {
-		app: ["AppSubNet1", "AppSubNet2"]
-		pub: ["PublicSubNet1", "PublicSubNet2"]
-		db:  ["DBSubNet1", "DBSubNet2"]
-	}
+  subnet_logical_ids = {
+    app : ["AppSubNet1", "AppSubNet2"]
+    pub : ["PublicSubNet1", "PublicSubNet2"]
+    dat : ["DBSubNet1", "DBSubNet2"]
+  }
 }

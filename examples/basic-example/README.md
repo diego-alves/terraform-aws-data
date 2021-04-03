@@ -1,10 +1,4 @@
-[![Maintained by Diego Alves](https://img.shields.io/badge/maintained%20by-diego--alves-blue)](https://github.com/diego-alves) [![Module Version](https://img.shields.io/github/v/tag/diego-alves/terraform-aws-data?label=version&sort=semver)](https://registry.terraform.io/modules/diego-alves/data/aws/latest)
-
-# AWS Data Terraform Module
-
-This repo contains a [Terraform](https://terraform.io) [Module](https://www.terraform.io/docs/language/modules/index.html) for retrieving some data from the current account the automation is being applied.
-
-## How to use this Module
+# Basic Example
 
 For the basic usage you can include as follows:
 
