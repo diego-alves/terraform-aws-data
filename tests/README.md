@@ -9,7 +9,7 @@ This folder contains automated tests for this Module. All of the tests are writt
 - Install the latest version of [Go](https://golang.org/doc/install).
 - Install [Terraform](https://learn.hashicorp.com/tutorials/terraform/install-cli).
 - Configure your AWS credentials using one of the [options supported by the AWS](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#authentication).
-    > Usually, the easiest option is to set the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
+  > Usually, the easiest option is to set the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
 
 ### One-time setup
 
